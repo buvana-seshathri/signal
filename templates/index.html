@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Signal — voice notes to action items</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">Signal</div>
+    <div class="local-tag">● running locally via Ollama</div>
+  </header>
+  <h1>Say it messy. Get it structured.</h1>
+  <p class="sub">Dictate or paste a rambling note — meeting recap, brain dump, voicemail transcript — and get clean, assigned action items back. Fully offline: nothing leaves your machine.</p>
+
+  <div class="panels">
+    <div class="panel">
+      <div class="panel-label"><span class="dot" id="micDot"></span> Raw capture</div>
+      <textarea id="rawInput" placeholder="Click the mic and start talking, or just paste/type a messy note here. e.g. &quot;ok so after the call sarah needs to get the deck updated by friday, high priority, and I still owe mike the budget numbers whenever, and someone should probably follow up with the client early next week...&quot;"></textarea>
+      <div class="controls">
+        <button class="btn-mic" id="micBtn">🎙 Start dictation</button>
+        <button class="btn-extract" id="extractBtn">Extract action items →</button>
+        <button class="btn-clear" id="clearBtn">Clear</button>
+      </div>
+      <div class="status-line" id="statusLine"></div>
+    </div>
+
+    <div class="stitch">
+      <svg viewBox="0 0 40 60" fill="none">
+        <path d="M2 10 L38 30 L2 50" stroke="#5B5FEF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <div class="panel">
+      <div class="panel-label"><span class="dot" id="structDot"></span> Structured output</div>
+      <div class="results" id="results">
+        <div class="empty-state" id="emptyState">Extracted action items will appear here as cards — task, owner, priority, and due date.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
