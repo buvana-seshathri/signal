@@ -17,14 +17,19 @@ from flask import Flask, jsonify, render_template, request
 app = Flask(__name__)
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
-OLLAMA_MODEL = "llama3.2"  # change to whatever model you've pulled, e.g. "mistral", "llama3.1"
+OLLAMA_MODEL = "llama3.2" 
 
 SYSTEM_PROMPT = (
     "You extract action items from rambling notes or transcripts. "
     'Respond with ONLY a JSON object of the form: {"items": [...]}, no preamble, '
     "no markdown fences, no commentary. "
-    'Each entry in "items" must look like: {"task": string, "owner": string or null, '
+    'Each entry in "items" must look like: {"task": string, "owner": string, '
     '"due": string or null, "priority": "high", "medium", or "low"}. '
+    'Owner rules: if the note uses first-person phrasing ("I need to...", '
+    '"I have to...", "I still owe...", or no owner is stated at all), set owner '
+    'to "Me". If a specific person is named as responsible, use their name. '
+    'Owner should only ever be null if the task is about a third party with no '
+    "clear owner (rare) — prefer \"Me\" as the default. "
     "Infer priority from tone/urgency words if it isn't explicit. "
     "Keep task text concise, under 12 words. "
     'If there are no clear action items, respond with {"items": []}.'

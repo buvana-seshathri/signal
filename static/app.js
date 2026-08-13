@@ -124,7 +124,7 @@ extractBtn.addEventListener('click', async () => {
             <div class="badge ${priority}">${priority}</div>
           </div>
           <div class="card-meta">
-            <span>👤 ${escapeHtml(item.owner || 'Unassigned')}</span>
+            <span>👤 ${escapeHtml(item.owner || 'Me')}</span>
             <span>📅 ${escapeHtml(item.due || 'No date')}</span>
           </div>
         `;
